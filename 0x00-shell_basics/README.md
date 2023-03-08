@@ -1,1 +1,1 @@
-1. What’s in there?
+0x00. Shell, basics
