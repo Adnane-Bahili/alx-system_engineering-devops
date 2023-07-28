@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# displays 'Best School' 10 times
+# for the 9th iteration, on a new line, displays 'Hi'
+c=0
+
+while [ $c -lt 10 ]
+do
+	echo "Best School"
+	if [ $c -eq 8 ]
+	then
+		echo "Hi"
+	fi
+	(( c++ ))
+done
