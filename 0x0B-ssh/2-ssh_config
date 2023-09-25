@@ -47,8 +47,8 @@ Host *
 #   VisualHostKey no
 #   ProxyCommand ssh -q -W %h:%p gateway.example.com
 #   RekeyLimit 1G 1h
-#   IdentifyFile ~/.ssh/school
-#   PasswordAuthentication no
+    IdentifyFile ~/.ssh/school
+    PasswordAuthentication no
     SendEnv LANG LC_*
     HashKnownHosts yes
     GSSAPIAuthentication yes
