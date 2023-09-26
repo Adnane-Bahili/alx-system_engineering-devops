@@ -40,4 +40,8 @@ sudo touch /var/www/nginx/html/index.html
 echo "Hello World!" > /var/www/nginx/html/index.html
 
 
+# Testing configurations
+sudo nginx -t
+
+
 sudo service nginx restart

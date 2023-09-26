@@ -36,8 +36,8 @@ sudo touch /var/www/nginx/html/index.html
 cat "Hello World!" > /var/www/nginx/html/index.html
 
 
-# Incoming HTTP fix
-sudo ufw allow 'Nginx HTTP'
+# Testing configurations
+sudo nginx -t
 
 
-sudo service nginx start
+sudo service nginx restart
