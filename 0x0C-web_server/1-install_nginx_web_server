@@ -40,4 +40,4 @@ cat "Hello World!" > /var/www/nginx/html/index.html
 sudo ufw allow 'Nginx HTTP'
 
 
-sudo service nginx restart
+sudo service nginx start
