@@ -33,7 +33,7 @@ sudo touch /var/www/nginx/html/index.html
 
 
 # Adding the string
-echo "Hello World!" > /var/www/nginx/html/index.html
+cat "Hello World!" > /var/www/nginx/html/index.html
 
 
 # Incoming HTTP fix
