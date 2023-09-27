@@ -19,14 +19,14 @@ echo "server {
 	listen 80;
 	listen [::]:80;
 	server_name servingweb.tech;
-	root /var/www/nginx/html;
-	index index.html;
+	root /var/www/html;
+	index index.nginx-debian.html;
 	location /redirect_me {
 		return 301 https://en.wikipedia.org/wiki/Nginx;
 	}
 	error_page 404 /error_404.html;
 	location /404 {
-		root /etc/nginx/html;
+		root /etc/html;
 		internal;
 	}
 }" > /etc/nginx/sites-available/default
@@ -37,16 +37,16 @@ sudo ufw allow 'Nginx HTTP'
 
 
 # Creating the string page
-sudo mkdir  /var/www/nginx/html/
-sudo touch /var/www/nginx/html/index.html
+sudo mkdir  /var/www/html/
+sudo touch /var/www/html/index.html
 
 
 # Adding the string
-echo "Hello World!" > /var/www/nginx/html/index.html
+echo "Hello World!" > /var/www/html/index.nginx-debian.html
 
 
 # Setting up a custom 404 page message
-echo -e "Ceci n'est pas une page\n " > /var/www/nginx/html/error_404.html
+echo -e "Ceci n'est pas une page" > /var/www/html/error_404.html
 
 
 # Testing configurations
