@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Installs 'Nginx' and configures it to listen on port 80, stops it at the end
+sudo apt-get -y install nginx
+sudo service nginx start
+sudo service nginx stop
