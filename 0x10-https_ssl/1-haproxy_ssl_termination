@@ -1,0 +1,55 @@
+listen myserver
+        bind *:80
+        bind   *:443 ssl crt /etc/haproxy/ssl-certs/cert.pem
+        balance roundrobin
+        server 387476-web-01 54.197.95.192:80 check
+        server 387476-web-02 34.207.120.158:80 check
+
+        global
+    log     /dev/log local0
+    maxconn 2048
+    user    haproxy
+    group   haproxy
+    tune.ssl.default-dh-param 2048
+
+defaults
+    log     global
+    mode    http
+    option  httplog
+    option  dontlognull
+    retries 3
+    option  redispatch
+    timeout connect  5000
+    timeout client  10000
+    timeout server  10000
+    option  forwardfor
+    option  http-server-close
+
+frontend letsencrypt-frontend
+    bind *:80
+    mode http
+    option httplog
+    acl    letsencrypt-acl path_beg /.well-known/acme-challenge/
+    use_backend letsencrypt-backend if letsencrypt-acl
+
+frontend www-http
+    bind   *:80
+    http-request add-header X-Forwarded-Proto http
+    default_backend www-backend
+
+frontend www-https
+    bind   *:443 ssl crt /etc/haproxy/ssl-certs/cert.pem
+    http-request add-header X-Forwarded-Proto https
+    acl    letsencrypt-acl path_beg /.well-known/acme-challenge/
+    use_backend letsencrypt-backend if letsencrypt-acl
+    default_backend www-backend
+
+backend www-backend
+    balance  roundrobin
+    redirect scheme https if !{ ssl_fc }
+    server server1 54.197.95.192:80 check
+    server server2 34.207.120.158:80 check
+
+backend letsencrypt-backend
+    mode http
+    server letsencrypt 127.0.0.1:4562
