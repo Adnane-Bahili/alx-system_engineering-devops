@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# Allows the web server to run 'Nginx' as the user "nginx"
+#	and to listen on port 8080
+
+
+# Granting permissions
+sudo chmod 644 /etc/nginx/nginx.conf
+
+
+# Configuring the user "nginx"
+sudo sed -i "s/#user www-data/user nginx/" /etc/nginx/nginx.conf
+
+
+# Configuring the 8080 port
+sudo sed -i "s/80/8080/g" /etc/nginx/sites-available/default
+
+
+#stops the Apache HTTP server if it's running. TO ALLOW ONLY NGINX TO RUN ON PORT 8080
+pkill haproxy
+pkill apache2
+
+
+# Restarting 'Nginx'
+sudo -u nginx service nginx restart
