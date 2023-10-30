@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-# Installs 'Nginx' and configures it to listen on port 80, stops it at the end
-ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
-service nginx start
-kill "$(pgrep 'nginx' | head -1)"
